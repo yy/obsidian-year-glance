@@ -7,9 +7,7 @@ import { TooltipManager } from './tooltip';
 export default class YearGlancePlugin extends Plugin {
   private tooltipManager: TooltipManager;
 
-  async onload() {
-    console.log('Loading Year Glance plugin');
-
+  onload(): void {
     // Create tooltip manager
     this.tooltipManager = new TooltipManager();
     this.tooltipManager.create();
@@ -23,8 +21,7 @@ export default class YearGlancePlugin extends Plugin {
     );
   }
 
-  async onunload() {
-    console.log('Unloading Year Glance plugin');
+  onunload(): void {
     this.tooltipManager.destroy();
   }
 

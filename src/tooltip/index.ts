@@ -15,7 +15,6 @@ export class TooltipManager {
 
     this.tooltip = document.createElement('div');
     this.tooltip.className = 'year-glance-tooltip';
-    this.tooltip.style.display = 'none';
     document.body.appendChild(this.tooltip);
   }
 
@@ -59,7 +58,7 @@ export class TooltipManager {
     this.position(target);
 
     // Show
-    this.tooltip.style.display = 'block';
+    this.tooltip.classList.add('is-visible');
   }
 
   /**
@@ -70,7 +69,7 @@ export class TooltipManager {
 
     this.hideTimeout = window.setTimeout(() => {
       if (this.tooltip) {
-        this.tooltip.style.display = 'none';
+        this.tooltip.classList.remove('is-visible');
       }
     }, 100);
   }
