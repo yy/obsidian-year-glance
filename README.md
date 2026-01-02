@@ -2,7 +2,17 @@
 
 A yearly calendar plugin for Obsidian that renders a whole-year view with events marked using colored indicators.
 
+![12-rows expanded layout](year-glance-12rows-expanded.jpg)
+
+![3x4 compact layout](year-glance-3x4-compact.jpg)
+
 ## Installation
+
+### Community Plugin (Recommended)
+
+1. Open Obsidian Settings → Community plugins
+2. Click "Browse" and search for "Year Glance"
+3. Click "Install" then "Enable"
 
 ### Manual Installation
 
@@ -10,13 +20,6 @@ A yearly calendar plugin for Obsidian that renders a whole-year view with events
 2. Create a folder called `year-glance` in your vault's `.obsidian/plugins/` directory
 3. Copy the downloaded files into this folder
 4. Restart Obsidian and enable "Year Glance" in Settings → Community plugins
-
-### BRAT (Beta Reviewers Auto-update Tester)
-
-1. Install the [BRAT plugin](https://github.com/TfTHacker/obsidian42-brat)
-2. In BRAT settings, click "Add Beta plugin"
-3. Enter: `yy/obsidian-year-glance`
-4. Enable the plugin in Community plugins
 
 ## Basic Usage
 
