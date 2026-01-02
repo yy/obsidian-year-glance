@@ -1,0 +1,749 @@
+/* Year Glance Plugin Styles */
+
+/* CSS Custom Properties */
+.year-glance {
+  --yg-cell-size: 24px;
+  --yg-cell-gap: 2px;
+  --yg-month-gap: 8px;
+  --yg-border-radius: 3px;
+  --yg-font-size-day: 11px;
+  --yg-font-size-header: 13px;
+  --yg-font-size-weekday: 10px;
+  --yg-indicator-height: 4px;
+  --yg-indicator-gap: 1px;
+}
+
+/* Main container */
+.year-glance {
+  font-family: var(--font-interface);
+  color: var(--text-normal);
+  padding: 16px;
+}
+
+/* Year header */
+.year-glance-header {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--text-normal);
+}
+
+/* 3x4 Grid Layout */
+.year-glance--3x4 .year-glance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--yg-month-gap);
+}
+
+/* Month container */
+.year-glance-month {
+  background: var(--background-secondary);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Month header */
+.year-glance-month-header {
+  font-size: var(--yg-font-size-header);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 4px;
+  color: var(--text-normal);
+}
+
+/* Weekday headers */
+.year-glance-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--yg-cell-gap);
+  margin-bottom: 4px;
+}
+
+.year-glance-weekday {
+  font-size: var(--yg-font-size-weekday);
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Days grid */
+.year-glance-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--yg-cell-gap);
+}
+
+/* Day cell */
+.year-glance-day {
+  width: var(--yg-cell-size);
+  height: var(--yg-cell-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  border-radius: var(--yg-border-radius);
+  cursor: default;
+}
+
+.year-glance-day:hover {
+  background: var(--background-modifier-hover);
+}
+
+.year-glance-day.has-events {
+  cursor: pointer;
+}
+
+.year-glance-day-empty {
+  visibility: hidden;
+}
+
+/* Day number */
+.year-glance-day-number {
+  font-size: var(--yg-font-size-day);
+  line-height: 1.2;
+  z-index: 1;
+  color: var(--text-normal);
+}
+
+/* Today indicator - diamond shape */
+.year-glance-day--today {
+  position: relative;
+}
+
+.year-glance-day--today::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background: var(--text-accent);
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+.year-glance-day--today .year-glance-day-number {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+/* Event indicators container */
+.year-glance-indicators {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--yg-indicator-gap);
+}
+
+/* Event indicator bar */
+.year-glance-indicator {
+  height: var(--yg-indicator-height);
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+/* Multi-day event styling */
+.year-glance-indicator.indicator-start {
+  border-top-left-radius: var(--yg-border-radius);
+  border-bottom-left-radius: var(--yg-border-radius);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: -2px;
+}
+
+.year-glance-indicator.indicator-end {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--yg-border-radius);
+  border-bottom-right-radius: var(--yg-border-radius);
+  margin-left: -2px;
+}
+
+.year-glance-indicator.indicator-middle {
+  border-radius: 0;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+/* Overflow indicator */
+.year-glance-indicator-overflow {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Tooltip */
+.year-glance-tooltip {
+  position: fixed;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  max-width: 280px;
+  z-index: 1000;
+  box-shadow: var(--shadow-s);
+  pointer-events: none;
+}
+
+.tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.tooltip-item:not(:last-child) {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tooltip-date {
+  color: var(--text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.tooltip-desc {
+  color: var(--text-normal);
+  flex-grow: 1;
+}
+
+/* Error display */
+.year-glance-errors {
+  background: var(--background-modifier-error);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.year-glance-error {
+  font-size: 12px;
+  color: var(--text-error);
+  margin-bottom: 4px;
+}
+
+.year-glance-error:last-child {
+  margin-bottom: 0;
+}
+
+.year-glance-error-line {
+  font-weight: 600;
+}
+
+.year-glance-error-message {
+  color: var(--text-normal);
+}
+
+/* ========================================
+   12-ROWS LAYOUT - One month per row
+   ======================================== */
+
+.year-glance--12-rows .year-glance-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.year-glance-month-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--background-modifier-border-hover);
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+
+.year-glance-month-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.year-glance-month-label {
+  width: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-normal);
+  flex-shrink: 0;
+  text-align: right;
+  line-height: 24px;
+}
+
+.year-glance-month-days {
+  display: flex;
+  gap: 1px;
+  flex: 1;
+}
+
+/* Week-aligned layout with separators */
+.year-glance-month-days--aligned {
+  gap: 0;
+}
+
+.year-glance-week-block {
+  display: flex;
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+.year-glance-week-block:last-child {
+  border-right: none;
+}
+
+.year-glance-row-day {
+  width: 18px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2px;
+  border-radius: 2px;
+  cursor: default;
+}
+
+.year-glance-row-day:hover {
+  background: var(--background-modifier-hover);
+}
+
+.year-glance-row-day.has-events {
+  cursor: pointer;
+}
+
+.year-glance-row-day-empty {
+  visibility: hidden;
+}
+
+.year-glance-row-day--weekend .year-glance-row-day-number {
+  color: var(--text-faint);
+}
+
+/* Today indicator for 12-rows compact */
+.year-glance-row-day--today {
+  position: relative;
+}
+
+.year-glance-row-day--today::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 4px;
+  height: 4px;
+  background: var(--text-accent);
+  transform: rotate(45deg);
+}
+
+.year-glance-row-day--today .year-glance-row-day-number {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.year-glance-row-day-number {
+  font-size: 9px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.year-glance-row-day.has-events .year-glance-row-day-number {
+  color: var(--text-normal);
+  font-weight: 500;
+}
+
+.year-glance-row-indicators {
+  display: flex;
+  gap: 1px;
+  margin-top: 2px;
+}
+
+.year-glance-row-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+/* ========================================
+   12-ROWS EXPANDED STYLE
+   ======================================== */
+
+.year-glance-month-row--expanded {
+  align-items: flex-start;
+}
+
+.year-glance-month-label--expanded {
+  line-height: 18px;
+}
+
+/* Weekday header row */
+.year-glance-12row-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.year-glance-12row-weekday-headers {
+  display: flex;
+}
+
+.year-glance-12row-weekday {
+  width: 16px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: var(--text-normal);
+  font-weight: 700;
+}
+
+.year-glance-12row-weekday--weekend {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.year-glance-12row-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.year-glance-12row-days {
+  display: flex;
+}
+
+/* Week-aligned days layout */
+.year-glance-12row-days--aligned {
+  gap: 0;
+}
+
+.year-glance-12row-week-block {
+  display: flex;
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+.year-glance-12row-week-block:last-child {
+  border-right: none;
+}
+
+.year-glance-12row-day {
+  width: 16px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.year-glance-12row-day-number {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.year-glance-12row-day-empty {
+  visibility: hidden;
+}
+
+.year-glance-12row-day--weekend .year-glance-12row-day-number {
+  color: var(--text-faint);
+}
+
+/* Today indicator for 12-rows expanded */
+.year-glance-12row-day--today {
+  position: relative;
+}
+
+.year-glance-12row-day--today::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 4px;
+  height: 4px;
+  background: var(--text-accent);
+  transform: rotate(45deg);
+}
+
+.year-glance-12row-day--today .year-glance-12row-day-number {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.year-glance-12row-events {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px 0;
+}
+
+.year-glance-12row-event-slot {
+  position: relative;
+  height: 14px;
+}
+
+/* Multi-day event bar */
+.year-glance-12row-event-bar {
+  position: absolute;
+  height: 14px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+  overflow: hidden;
+  cursor: pointer;
+  /* left and width set via JS */
+}
+
+.year-glance-12row-event-bar:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.year-glance-12row-event-bar .year-glance-12row-event-text {
+  color: white;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Single-day event */
+.year-glance-12row-event-single {
+  position: absolute;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 3px;
+  cursor: pointer;
+  background: var(--background-primary);
+  border-radius: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  /* left and width set via JS */
+}
+
+.year-glance-12row-event-single:hover {
+  background: var(--background-modifier-hover);
+}
+
+.year-glance-12row-event-bullet {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.year-glance-12row-event-single .year-glance-12row-event-text {
+  font-size: 9px;
+  color: var(--text-normal);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* ========================================
+   EXPANDED STYLE - Row-based with floating events (3x4)
+   ======================================== */
+
+.year-glance--expanded {
+  --yg-event-height: 18px;
+  --yg-event-gap: 2px;
+  --yg-event-font-size: 11px;
+}
+
+/* Remove gap between months in expanded view */
+.year-glance--expanded .year-glance-grid {
+  gap: 0;
+}
+
+/* Left-align weekday headers in expanded view to match date alignment */
+.year-glance--expanded .year-glance-weekday {
+  text-align: left;
+  padding-left: 6px;
+}
+
+/* Expanded month container */
+.year-glance-month--expanded {
+  overflow: visible;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Calendar body */
+.year-glance-calendar-body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+}
+
+/* Week row: contains day numbers + events */
+.year-glance-week-row {
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.year-glance-week-row:last-child {
+  border-bottom: none;
+}
+
+/* Day numbers row */
+.year-glance-week-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--background-primary);
+}
+
+/* Expanded day cell - just the number */
+.year-glance-day--expanded {
+  width: auto;
+  height: auto;
+  padding: 4px 6px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 0;
+  background: var(--background-primary);
+}
+
+.year-glance-day--expanded .year-glance-day-number {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.year-glance-day--expanded.year-glance-day-empty {
+  visibility: visible;
+  background: var(--background-secondary);
+}
+
+/* Events container for a week */
+.year-glance-week-events {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--yg-event-gap);
+  padding: 2px 0;
+  background: var(--background-primary);
+  overflow: visible;
+}
+
+/* Event slot row - positions events horizontally */
+.year-glance-event-slot {
+  position: relative;
+  height: var(--yg-event-height);
+  overflow: visible;
+}
+
+/* Multi-day event bar */
+.year-glance-event-bar {
+  position: absolute;
+  height: var(--yg-event-height);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* Position: start at column, span columns */
+  --col-width: calc(100% / 7);
+  left: calc(var(--start-col) * var(--col-width) + 2px);
+  width: calc(var(--span-cols) * var(--col-width) - 4px);
+}
+
+.year-glance-event-bar:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Single-day event: bullet + floating text */
+.year-glance-event-single {
+  position: absolute;
+  height: var(--yg-event-height);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px 0 4px;
+  cursor: pointer;
+  z-index: 1;
+  background: var(--background-primary);
+  border-radius: 3px;
+  white-space: nowrap;
+
+  /* Position: anchored to column, extends as needed */
+  --col-width: calc(100% / 7);
+  left: calc(var(--start-col) * var(--col-width) + 2px);
+}
+
+.year-glance-event-single:hover {
+  background: var(--background-modifier-hover);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Colored bullet */
+.year-glance-event-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Event text (shared between bar and single) */
+.year-glance-event-text {
+  font-size: var(--yg-event-font-size);
+  line-height: var(--yg-event-height);
+}
+
+/* Bar text: truncate with ellipsis */
+.year-glance-event-bar .year-glance-event-text {
+  color: white;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Single-day text: show full text */
+.year-glance-event-single .year-glance-event-text {
+  color: var(--text-normal);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 800px) {
+  .year-glance--3x4 .year-glance-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .year-glance--3x4 .year-glance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .year-glance--compact {
+    --yg-cell-size: 28px;
+    --yg-font-size-day: 12px;
+  }
+
+  .year-glance--expanded {
+    --yg-event-height: 16px;
+    --yg-event-font-size: 10px;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "obsidian-year-glance",
+  "version": "0.1.0",
+  "description": "Yearly glance calendar plugin for Obsidian",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "install-plugin": "./install.sh",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": [
+    "obsidian",
+    "calendar",
+    "year-glance",
+    "yearly-calendar"
+  ],
+  "author": "YY Ahn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yy/obsidian-year-glance.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yy/obsidian-year-glance/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.20.0",
+    "obsidian": "latest",
+    "typescript": "^5.3.0"
+  }
+}
