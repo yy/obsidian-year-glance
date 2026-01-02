@@ -1,11 +1,11 @@
 {
-  "id": "year-glance",
-  "name": "Year Glance",
-  "version": "0.1.0",
-  "minAppVersion": "1.0.0",
-  "description": "Render yearly calendar views with events marked and color-coded.",
-  "author": "YY Ahn",
-  "authorUrl": "https://github.com/yy",
-  "fundingUrl": "",
-  "isDesktopOnly": false
+	"id": "year-glance",
+	"name": "Year Glance",
+	"version": "0.1.1",
+	"minAppVersion": "1.0.0",
+	"description": "Render yearly calendar views with events marked and color-coded.",
+	"author": "YY Ahn",
+	"authorUrl": "https://github.com/yy",
+	"fundingUrl": "",
+	"isDesktopOnly": false
 }
