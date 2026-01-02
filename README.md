@@ -8,7 +8,7 @@ A yearly calendar plugin for Obsidian that renders a whole-year view with events
 
 ## Installation
 
-### Community Plugin (Recommended)
+### Community Plugin (Recommended, but currently under review and not yet available)
 
 1. Open Obsidian Settings → Community plugins
 2. Click "Browse" and search for "Year Glance"
